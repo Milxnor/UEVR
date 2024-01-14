@@ -5,6 +5,7 @@
 #include <ShlObj.h>
 
 #include <spdlog/sinks/basic_file_sink.h>
+#include <sdk/UObjectArray.hpp>
 
 #include <imgui.h>
 #include "uevr-imgui/font_robotomedium.hpp"
@@ -934,11 +935,15 @@ std::filesystem::path Framework::get_persistent_dir() {
         SHGetSpecialFolderPathA(0, app_data_path, CSIDL_APPDATA, false);
 
         const auto exe_name = [&]() {
+            std::string versionIdentifier =  std::to_string(sdk::get_fortnite_version()); // we could use cl too // remove trailing zeros todo
+            return std::filesystem::path("Fortnite_" + versionIdentifier);
+            /*
             const auto result = std::filesystem::path(*utility::get_module_path(utility::get_executable())).stem().string();
             const auto dir = std::filesystem::path(app_data_path) / "UnrealVRMod" / result;
             std::filesystem::create_directories(dir);
 
             return result;
+            */
         }();
 
         return std::filesystem::path(app_data_path) / "UnrealVRMod" / exe_name;
@@ -1150,7 +1155,7 @@ void Framework::draw_ui() {
     }
 
     ImGui::SetNextWindowSize(ImVec2(window_w, window_h), ImGuiCond_::ImGuiCond_Once);
-    ImGui::Begin("UEVR", &m_draw_ui);
+    ImGui::Begin("UEVR - Modified by Milxnor for Fortnite", &m_draw_ui);
 
     ImGui::BeginGroup();
     ImGui::Columns(2);

@@ -29,8 +29,13 @@
 #include "IXRTrackingSystemHook.hpp"
 
 detail::IXRTrackingSystemVT& get_tracking_system_vtable(std::optional<std::string> version_override = std::nullopt) {
-    const auto str_version = version_override.has_value() ? version_override.value() : utility::narrow(sdk::search_for_version(utility::get_executable()).value_or(L"0.00"));
+    // const auto str_version = version_override.has_value() ? version_override.value() : utility::narrow(sdk::search_for_version(utility::get_executable()).value_or(L"0.00"));
     auto version = sdk::get_file_version_info();
+    /* const */ auto str_version = std::to_string(sdk::get_engine_version());
+
+    str_version.insert(1, 1, '.');
+
+    if (str_version.starts_with("4.22")) str_version = "4.21";
 
     if (str_version != "0.00") {
         SPDLOG_INFO("Found version {} from executable", str_version);
@@ -87,6 +92,7 @@ detail::IXRTrackingSystemVT& get_tracking_system_vtable(std::optional<std::strin
 
     // 4.22
     if (version.dwFileVersionMS == 0x40016 || str_version.starts_with("4.22")) {
+        SPDLOG_INFO("4.22!!!!!!");
         return ue4_22::IXRTrackingSystemVT::get();
     }
 
