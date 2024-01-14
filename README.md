@@ -1,8 +1,7 @@
 # UEVR ![build](https://github.com/praydog/UEVR/actions/workflows/dev-release.yml/badge.svg)
 
-Universal Unreal Engine VR Mod (4/5)
-
-4.8 - 5.3
+Fortnite Unreal Engine VR Mod
+Made origially by praydog and modified by Milxnor to focus on Fortnite.
 
 ## Links
 
