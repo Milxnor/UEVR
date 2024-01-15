@@ -36,6 +36,7 @@ detail::IXRTrackingSystemVT& get_tracking_system_vtable(std::optional<std::strin
     str_version.insert(1, 1, '.');
 
     if (str_version.starts_with("4.22")) str_version = "4.21";
+    else if (str_version.starts_with("4.19")) str_version = "4.18";
 
     if (str_version != "0.00") {
         SPDLOG_INFO("Found version {} from executable", str_version);
